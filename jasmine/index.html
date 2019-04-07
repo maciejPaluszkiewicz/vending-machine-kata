@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="src/main.css" />
     <script src="src/vendingmachine.js"></script>
-    <script src="src/main.js"></script>
+    
 </head>
 <body>
     <div class="thedeep">
         <div class="background">
             <div class="vmachine">
+            
             </div>
             <div class="coins">
                 <button id="nickel">0.05</button>
@@ -25,8 +26,16 @@
                 <button id="chips">Chips</button>
                 <button id="candy">Candy</button>
             </div>
-            <div class="display">CURRENT AMOUNT 1.25</div>
+            <div class="display">
+                <div id="message">
+                    INSERT COIN
+                </div>
+            </div>
+            <div class="specialButtons">
+                <button id="returnMoney">Give Back Money</button>
+            </div>
         </div>
     </div>
+    <script src="src/main.js"></script>
 </body>
 </html>

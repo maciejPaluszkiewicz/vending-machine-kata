@@ -47,6 +47,8 @@ class VendingMachine {
         };
 
         this.currentMessage = this.messages.insertCoin;
+
+        this.observers = [];
     }
     
     addToCurrentCoins(coin){
@@ -126,9 +128,25 @@ class VendingMachine {
         return price <= this.sumCurrentCoinsValue();
     }
 
+ //---------------------------
+ // Design Pattern Observer
+ //---------------------------
+
+
     setMessage(message){
         this.currentMessage = message;
+        for(let observer of this.observers){
+            observer.update();
+            
+        }
     }
+
+    subscribe(observer) {
+        this.observers.push(observer);
+    }
+
+    
+
 //----------------------------
 // PUBLIC API+
 //----------------------------
