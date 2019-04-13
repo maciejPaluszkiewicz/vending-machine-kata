@@ -10,7 +10,7 @@
 .background {
     width: 100vw;
     height: 100vh;
-    
+
     background-size: contain;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -42,28 +42,119 @@
     height: 400px;
     background-color: #3b3a30;
     top: 350px;
-    left: 50px;
+    left: 30px;
 
 }
+
+.coins button{
+    width: 80px;
+    height: 80px;
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    color: transparent;
+}
+
+#nickel{
+    background-image: url(../images/coinsnickel.png);   
+}
+
+#dime{
+    background-image: url(../images/coinsdime.png);   
+}
+
+#quarter{
+    background-image: url(../images/coinsquarter.png);   
+}
+
+#cap{
+    background-image: url(../images/coinscap.png);   
+}
+
+
 .options {
     position: absolute;
     width: 400px;
-    height: 90px;
-    background-color: #3b3a30;
-    top: 50px;
-    left: 1100px;
+    height: 200px;
+    background-color: darkgray;
+    top: 450px;
+    left: 1200px;
+    border: 3px #3b3a30 solid;
+    border-radius: 15px;
+    vertical-align: center;
+    text-align: center;
+    padding-top: 20px;
 }
+
+.options button{
+    width: 120px;
+    height: 120px;
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    color: transparent;
+    outline: none;
+}
+
+#cola{
+    background-image: url(../images/Cola000.png);
+}
+
+#chips{
+    background-image: url(../images/Chips000.png);
+}
+
+#candy{
+    background-image: url(../images/Candy000.png);
+}
+
 
 .display {
     position: absolute;
     width: 600px;
+    height: 120px;
+    top: 30px;
+    left: 570px;
+    vertical-align: center;
+    text-align: center;
+    padding-top: 30px;
+    padding-left: 30px;
+    background-color: darkgray;
+    border: 3px #3b3a30 solid;
+    border-radius: 15px;
+    
+}
+
+#message{
+    width: 530px;
     height: 50px;
-    background-color: #3b3a30;
-    top: 50px;
-    left: 400px;
     font-size: 36px;
     padding: 20px;
     color: greenyellow;
     text-align: center;
+    /* border-style: inset; */
+    border: 2px rgb(39, 39, 39) solid;
+    background-color: #3b3a30;
+    font-family: 'Russo One', sans-serif;
+    line-height: 54px;
+}
 
+/* .specialButtons{
+    margin: auto;
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    color: transparent;
+    outline: none;
+} */
+/* zrobic button + napis obok RETURN MONEY */
+#returnMoney {
+    width: 100px;
+    height: 50px;
+    background-color: yellow;
+    border: 3px #3b3a30 solid;
+    border-radius: 15px;
 }

@@ -40,10 +40,12 @@ class VendingMachine {
     
         this.messages = {
             insertCoin: "INSERT COIN",
-            currentAmount: "CURRENT AMOUNT",
+            currentAmount: "CURRENT AMOUNT ",
             thankYou: "THANK YOU",
             exactChangeOnly: "EXACT CHANGE ONLY",
-            soldOut: "SOLD OUT"
+            soldOut: "SOLD OUT",
+            priceOnDisplay: "PRICE: ",
+            insertRealCoin: "INSERT REAL COIN"
         };
 
         this.currentMessage = this.messages.insertCoin;
@@ -63,7 +65,7 @@ class VendingMachine {
         let nickelCoins = this.coins.nickel.value * this.currentCoins.nickel;
         let dimeCoins = this.coins.dime.value * this.currentCoins.dime;
         let quarterCoins = this.coins.quarter.value * this.currentCoins.quarter;
-        return nickelCoins + dimeCoins + quarterCoins;
+        return (nickelCoins + dimeCoins + quarterCoins).toFixed(2);
     }
 
     decreasePurchasedProductAmount(product){
@@ -155,9 +157,14 @@ class VendingMachine {
         let currentCoin = this.checkCoinByWeight(coinWeight);
         if(currentCoin){
             this.addToCurrentCoins(currentCoin);
-            this.setMessage(this.messages.currentAmount + " " + this.sumCurrentCoinsValue());
+            this.setMessage(this.messages.currentAmount + this.sumCurrentCoinsValue());
         } else {
-            this.giveBackCoin()
+            let previousMessage = this.currentMessage;
+            this.setMessage(this.messages.insertRealCoin);
+            setTimeout(()=>{
+                this.setMessage(previousMessage);
+            }, 2000)
+            this.giveBackCoin();
         }
     }
 
@@ -177,10 +184,19 @@ class VendingMachine {
             return;
         } 
         let canHandleCost = this.checkAmountWithPrice(this.products[product].price)
-        if(canHandleCost){
+        if(!canHandleCost){
+            this.setMessage(this.messages.priceOnDisplay + this.products[product].price);
+            setTimeout(()=>{
+                this.setMessage(this.messages.currentAmount + " " + this.sumCurrentCoinsValue());
+            }, 3000);
+        }   
+        else {
             let theChange = this.calculateChange(this.products[product].price, this.sumCurrentCoinsValue());
             if(theChange.dime === undefined) {
                 this.setMessage(this.messages.exactChangeOnly);
+                setTimeout(()=>{
+                    this.setMessage(this.messages.currentAmount + " " + this.sumCurrentCoinsValue());
+                }, 3000);
             } else {
                 this.returnChange(theChange);
                 this.decreasePurchasedProductAmount(product);
