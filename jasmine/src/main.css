@@ -37,12 +37,6 @@
 }
 
 .coins {
-    position: absolute;
-    width: 100px;
-    height: 400px;
-    background-color: #3b3a30;
-    top: 350px;
-    left: 30px;
 
 }
 
@@ -57,19 +51,31 @@
 }
 
 #nickel{
+    position: absolute;
     background-image: url(../images/coinsnickel.png);   
+    top: 350px;
+    left: 30px;
 }
 
 #dime{
+    position: absolute;
     background-image: url(../images/coinsdime.png);   
+    top: 430px;
+    left: 30px;
 }
 
 #quarter{
+    position: absolute;
     background-image: url(../images/coinsquarter.png);   
+    top: 520px;
+    left: 30px;
 }
 
 #cap{
+    position: absolute;
     background-image: url(../images/coinscap.png);   
+    top: 610px;
+    left: 30px;
 }
 
 
@@ -77,8 +83,8 @@
     position: absolute;
     width: 400px;
     height: 200px;
-    background-color: darkgray;
-    top: 450px;
+    background-color: rgba(169, 169, 169, 0.63);
+    top: 550px;
     left: 1200px;
     border: 3px #3b3a30 solid;
     border-radius: 15px;
@@ -141,6 +147,38 @@
     line-height: 54px;
 }
 
+.messenger {
+    position: absolute;
+    width: 400px;
+    height: 180px;
+    top: 750px;
+    left: 180px;
+    vertical-align: center;
+    text-align: center;
+    padding-top: 15px;
+    padding-left: 15px;
+    background-color: darkgray;
+    border: 3px #3b3a30 solid;
+    border-radius: 15px;
+    
+}
+
+#infoMessage{
+    width: 360px;
+    height: 140px;
+    font-size: 24px;
+    padding: 10px;
+    color: greenyellow;
+    text-align: left;
+    /* border-style: inset; */
+    border: 2px rgb(39, 39, 39) solid;
+    background-color: #3b3a30;
+    font-family: 'Russo One', sans-serif;
+    line-height: 36px;
+}
+
+
+
 /* .specialButtons{
     margin: auto;
     background-size: contain;
@@ -157,4 +195,24 @@
     background-color: yellow;
     border: 3px #3b3a30 solid;
     border-radius: 15px;
+}
+
+/* ANIMATIONS =========================================================== */
+
+@keyframes coinInsert {
+    75% {
+        top: 590px;
+        left: 720px;
+        transform: scale(0.4, 0.4);
+    }
+    100% {
+        top: 590px;
+        left: 720px;
+        transform: scale(0.4, 0.4);
+    }
+}
+
+.coinMoving {
+    animation-duration: 1.5s;
+    animation-name: coinInsert;
 }

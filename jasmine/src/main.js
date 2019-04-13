@@ -19,16 +19,17 @@
     document.querySelector("#returnMoney").addEventListener("click",returnMoneyListener);
 
     function nickelListener(){
-        vendingMachine.insertCoin(5);
+        animateCoin(5);
+        
     }
     function dimeListener(){
-        vendingMachine.insertCoin(3);
+        animateCoin(3);
     }
     function quarterListener(){
-        vendingMachine.insertCoin(6);
+        animateCoin(6);
     }
     function capListener(){
-        vendingMachine.insertCoin(100);
+        animateCoin(100);
     }
     function colaListener(){
         vendingMachine.selectProduct("cola");
@@ -43,3 +44,13 @@
         vendingMachine.giveBackMyMoney();
     }
 
+    function animateCoin(weight){
+        let coinName = "#" + vendingMachine.checkCoinByWeight(weight);
+        if(coinName==="#") coinName = "#cap";
+        let coinDOMelement = document.querySelector(coinName);
+        coinDOMelement.classList.add("coinMoving");
+        setTimeout(()=>{
+            coinDOMelement.classList.remove("coinMoving");
+            vendingMachine.insertCoin(weight);
+        }, 1500);
+    }
