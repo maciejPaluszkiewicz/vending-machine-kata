@@ -133,6 +133,15 @@
     
 }
 
+.targetNCMachine{
+    position: absolute;
+    top: 210px;
+    left: 680px;
+    width: 410px;
+    height: 705px; 
+    background-color: transparent;
+}
+
 #message{
     width: 530px;
     height: 50px;
@@ -150,7 +159,7 @@
 .messenger {
     position: absolute;
     width: 400px;
-    height: 180px;
+    height: 150px;
     top: 750px;
     left: 180px;
     vertical-align: center;
@@ -165,7 +174,7 @@
 
 #infoMessage{
     width: 360px;
-    height: 140px;
+    height: 110px;
     font-size: 24px;
     padding: 10px;
     color: greenyellow;
@@ -189,6 +198,12 @@
     outline: none;
 } */
 /* zrobic button + napis obok RETURN MONEY */
+
+.returnMoneyContainer{
+    width: 300px;
+    height: 80px;
+}
+
 #returnMoney {
     width: 100px;
     height: 50px;

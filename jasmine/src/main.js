@@ -30,7 +30,7 @@
     document.querySelector("#returnMoney").addEventListener("mouseover",function(){showInfoMessage("This is rusty button.")});
 
     document.querySelector(".display").addEventListener("mouseover",function(){showInfoMessage("This is display of machine.")});
-    // document.querySelector(".vmachine").addEventListener("mouseover",function(){showInfoMessage("Still working. Amazing.")});
+    document.querySelector(".targetNCMachine").addEventListener("mouseover",function(){showInfoMessage("Still working. Amazing.")});
 
     function animateCoin(weight){
         let coinName = "#" + vendingMachine.checkCoinByWeight(weight);
