@@ -1,13 +1,13 @@
 
 class VendingMachine {
 
-    constructor () {
+    constructor() {
         this.products = {
-            cola:{
+            cola: {
                 price: 1.00,
                 amount: 5
             },
-            chips:{
+            chips: {
                 price: 0.50,
                 amount: 3
             },
@@ -16,7 +16,7 @@ class VendingMachine {
                 amount: 12
             }
         };
-    
+
         this.coins = {
             nickel: {
                 value: 0.05,
@@ -31,13 +31,13 @@ class VendingMachine {
                 amount: 4
             }
         };
-    
+
         this.currentCoins = {
             nickel: 0,
             dime: 0,
             quarter: 0
         };
-    
+
         this.messages = {
             insertCoin: "INSERT COIN",
             currentAmount: "CURRENT AMOUNT ",
@@ -52,27 +52,27 @@ class VendingMachine {
 
         this.observers = [];
     }
-    
-    addToCurrentCoins(coin){
+
+    addToCurrentCoins(coin) {
         this.currentCoins[coin] += 1;
     }
 
-    checkIfSoldOut(product){
+    checkIfSoldOut(product) {
         return this.products[product].amount === 0
     }
 
-    sumCurrentCoinsValue(){
+    sumCurrentCoinsValue() {
         let nickelCoins = this.coins.nickel.value * this.currentCoins.nickel;
         let dimeCoins = this.coins.dime.value * this.currentCoins.dime;
         let quarterCoins = this.coins.quarter.value * this.currentCoins.quarter;
-        return (nickelCoins + dimeCoins + quarterCoins).toFixed(2);
+        return nickelCoins + dimeCoins + quarterCoins;
     }
 
-    decreasePurchasedProductAmount(product){
-        this.products[product].amount -= 1; 
+    decreasePurchasedProductAmount(product) {
+        this.products[product].amount -= 1;
     }
 
-    addCurrentCoinsToBoxes(){
+    addCurrentCoinsToBoxes() {
         this.coins.nickel.amount += this.currentCoins.nickel;
         this.coins.dime.amount += this.currentCoins.dime;
         this.coins.quarter.amount += this.currentCoins.quarter;
@@ -81,22 +81,22 @@ class VendingMachine {
         this.currentCoins.quarter = 0;
     }
 
-    returnChange(coinsToReturn){
+    returnChange(coinsToReturn) {
         this.coins.nickel.amount -= coinsToReturn.nickel;
         this.coins.dime.amount -= coinsToReturn.dime;
         this.coins.quarter.amount -= coinsToReturn.quarter;
     }
 
-    calculateChange(productValue, moneyInserted){
+    calculateChange(productValue, moneyInserted) {
         //debugger
-        let moneyToReturn = moneyInserted*100 - productValue*100;
-        
+        let moneyToReturn = moneyInserted * 100 - productValue * 100;
+
         const _updateChange = (coinType) => {
             let coinValue = this.coins[coinType].value * 100;
-            let coinsToReturn = (moneyToReturn - (moneyToReturn % coinValue))/coinValue;
+            let coinsToReturn = (moneyToReturn - (moneyToReturn % coinValue)) / coinValue;
             let availableCoinsForChange = this.coins[coinType].amount - coinsToReturn;
-            if(availableCoinsForChange < 0) coinsToReturn = this.coins[coinType].amount;
-        
+            if (availableCoinsForChange < 0) coinsToReturn = this.coins[coinType].amount;
+
             moneyToReturn -= coinsToReturn * coinValue;
             return coinsToReturn;
         }
@@ -104,42 +104,42 @@ class VendingMachine {
         let quartersToReturn = _updateChange("quarter");
         let dimesToReturn = _updateChange("dime");
         let nickelsToReturn = _updateChange("nickel");
-    
-        if(moneyToReturn > 0) return {};
-        return {nickel: nickelsToReturn, dime: dimesToReturn, quarter: quartersToReturn}
+
+        if (moneyToReturn > 0) return {};
+        return { nickel: nickelsToReturn, dime: dimesToReturn, quarter: quartersToReturn }
     }
 
-    checkCoinByWeight(coinWeight){
-        if(coinWeight > 2.8 && coinWeight < 3.2) return "dime";
-        if(coinWeight > 4.8 && coinWeight < 5.2) return "nickel";
-        if(coinWeight > 5.8 && coinWeight < 6.2) return "quarter";
+    checkCoinByWeight(coinWeight) {
+        if (coinWeight > 2.8 && coinWeight < 3.2) return "dime";
+        if (coinWeight > 4.8 && coinWeight < 5.2) return "nickel";
+        if (coinWeight > 5.8 && coinWeight < 6.2) return "quarter";
         return "";
     }
 
-    giveBackCoin(){
+    giveBackCoin() {
         //TODO
     }
 
-    giveBackAllCoins(){
+    giveBackAllCoins() {
         this.currentCoins.nickel = 0;
         this.currentCoins.dime = 0;
         this.currentCoins.quarter = 0;
     }
 
-    checkAmountWithPrice(price){
+    checkAmountWithPrice(price) {
         return price <= this.sumCurrentCoinsValue();
     }
 
- //---------------------------
- // Design Pattern Observer
- //---------------------------
+    //---------------------------
+    // Design Pattern Observer
+    //---------------------------
 
 
-    setMessage(message){
+    setMessage(message) {
         this.currentMessage = message;
-        for(let observer of this.observers){
+        for (let observer of this.observers) {
             observer.update();
-            
+
         }
     }
 
@@ -147,69 +147,73 @@ class VendingMachine {
         this.observers.push(observer);
     }
 
-    
 
-//----------------------------
-// PUBLIC API+
-//----------------------------
 
-    insertCoin(coinWeight){
+    //----------------------------
+    // PUBLIC API+
+    //----------------------------
+
+    insertCoin(coinWeight) {
         let currentCoin = this.checkCoinByWeight(coinWeight);
-        if(currentCoin){
+        if (currentCoin) {
             this.addToCurrentCoins(currentCoin);
-            this.setMessage(this.messages.currentAmount + this.sumCurrentCoinsValue());
+            this.setMessage(this.messages.currentAmount + this.sumCurrentCoinsValue().toFixed(2));
         } else {
             let previousMessage = this.currentMessage;
             this.setMessage(this.messages.insertRealCoin);
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.setMessage(previousMessage);
             }, 2000)
             this.giveBackCoin();
         }
     }
 
-    giveBackMyMoney(){
+    giveBackMyMoney() {
         this.giveBackAllCoins();
         this.setMessage(this.messages.insertCoin);
     }
 
-    selectProduct(product){
+    selectProduct(product) {
         // debugger
         let soldOut = this.checkIfSoldOut(product);
-        if(soldOut) {
+        if (soldOut) {
             this.setMessage(this.messages.soldOut);
-            setTimeout(()=>{
-                this.setMessage(this.messages.currentAmount + " " + this.sumCurrentCoinsValue());
+            setTimeout(() => {
+                this.setMessage(this.messages.currentAmount + this.sumCurrentCoinsValue().toFixed(2));
             }, 3000)
             return;
-        } 
+        }
         let canHandleCost = this.checkAmountWithPrice(this.products[product].price)
-        if(!canHandleCost){
-            this.setMessage(this.messages.priceOnDisplay + this.products[product].price);
-            setTimeout(()=>{
-                this.setMessage(this.messages.currentAmount + " " + this.sumCurrentCoinsValue());
+        if (!canHandleCost) {
+            this.setMessage(this.messages.priceOnDisplay + this.products[product].price.toFixed(2));
+            setTimeout(() => {
+                let coinsInMachine = this.sumCurrentCoinsValue()
+                if (coinsInMachine > 0) {
+                    this.setMessage(this.messages.currentAmount + coinsInMachine.toFixed(2));
+                } else {
+                    this.setMessage(this.messages.insertCoin);
+                }
             }, 3000);
-        }   
+        }
         else {
             let theChange = this.calculateChange(this.products[product].price, this.sumCurrentCoinsValue());
-            if(theChange.dime === undefined) {
+            if (theChange.dime === undefined) {
                 this.setMessage(this.messages.exactChangeOnly);
-                setTimeout(()=>{
-                    this.setMessage(this.messages.currentAmount + " " + this.sumCurrentCoinsValue());
+                setTimeout(() => {
+                    this.setMessage(this.messages.currentAmount + this.sumCurrentCoinsValue().toFixed(2));
                 }, 3000);
             } else {
                 this.returnChange(theChange);
                 this.decreasePurchasedProductAmount(product);
                 this.addCurrentCoinsToBoxes();
                 this.setMessage(this.messages.thankYou);
-                setTimeout(()=>{
+                setTimeout(() => {
                     this.setMessage(this.messages.insertCoin);
                 }, 3000)
             }
-        } 
+        }
     }
-    
-//----------------------------
+
+    //----------------------------
 
 };
-  

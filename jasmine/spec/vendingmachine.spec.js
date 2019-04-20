@@ -69,7 +69,6 @@ describe("Vending Machine", () => {
 
     it("Should return true if sum of coins amount is equal price", () => {
         //given
-        let colaPrice = vendingMachine.products.cola.price;
         vendingMachine.addToCurrentCoins("quarter");
         vendingMachine.addToCurrentCoins("quarter");
         vendingMachine.addToCurrentCoins("quarter");
@@ -78,8 +77,8 @@ describe("Vending Machine", () => {
         vendingMachine.addToCurrentCoins("nickel");
         //when
         let sumOfCoinsAmount = vendingMachine.sumCurrentCoinsValue();
-        //then
-        expect(sumOfCoinsAmount).toEqual(colaPrice);
+        //then 
+        expect(sumOfCoinsAmount).toEqual(1);
     });
 
     it("Should delete one of products from amount in machine at completing purchase", () => {
@@ -217,7 +216,7 @@ describe("Vending Machine", () => {
 
         jasmine.clock().tick(3500);
 
-        expect(vendingMachine.currentMessage).toEqual("CURRENT AMOUNT 0.1");
+        expect(vendingMachine.currentMessage).toEqual("CURRENT AMOUNT 0.10");
 
         jasmine.clock().uninstall()
     })
@@ -270,4 +269,24 @@ describe("Vending Machine", () => {
         jasmine.clock().uninstall()
     })
 
+    it("Should display Insert Coin if current amount equals zero after price check", () => {
+
+        jasmine.clock().install();
+
+        //given
+        let product = "candy";
+
+        //when
+        vendingMachine.selectProduct(product);
+
+        //then
+        expect(vendingMachine.currentMessage).toEqual("PRICE: 0.65");
+
+        jasmine.clock().tick(3500);
+
+        expect(vendingMachine.currentMessage).toEqual("INSERT COIN");
+
+        jasmine.clock().uninstall()
+
+    })
 });

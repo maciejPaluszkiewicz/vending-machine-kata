@@ -186,8 +186,6 @@
     line-height: 36px;
 }
 
-
-
 /* .specialButtons{
     margin: auto;
     background-size: contain;
@@ -199,17 +197,118 @@
 } */
 /* zrobic button + napis obok RETURN MONEY */
 
-.returnMoneyContainer{
-    width: 300px;
-    height: 80px;
+#returnMoneyContainer{
+    margin: 15px auto 0px auto;
+    /* margin-left: auto;
+    margin-right: auto; */
+    width: 250px;
+    height: 50px;
+    background-color: transparent;
+    border: 3px #3b3a30 solid;
+    border-radius: 25px;
+    text-align: center
+}    
+#msgGiveBackMoney{
+    font-family: 'Russo One', sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-align: center;
+    float: left;
+    margin-left: 12px;
+    margin-top: 14px;
+    display: block;
 }
 
 #returnMoney {
-    width: 100px;
-    height: 50px;
-    background-color: yellow;
-    border: 3px #3b3a30 solid;
+    height: 40px;
+    width: 40px;
+    /* border: 2px #3b3a30 solid; */
+    margin-top: 2px;
+    border-radius: 20px;
+    background-color: darkred; 
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 6px rgb(54, 10, 10);
+    float: left;
+    margin-left: 3px;
+}
+
+#returnMoney:active{
+    box-shadow: 0 3px rgb(54, 10, 10);
+    transform: translateY(4px);
+}
+/* .button {
+
+    padding: 15px 25px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
     border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  
+  .button:hover {background-color: #3e8e41}
+  
+  .button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  } */
+
+
+
+
+.textedSounds {
+
+}
+
+#bing {
+    background-image: url(../images/bing.png);
+    position: absolute;
+}
+
+#crush {
+    background-image: url(../images/crush.png);
+    position: absolute;
+}
+
+#dang {
+    background-image: url(../images/dang.png);
+    position: absolute;
+}
+
+#ding {
+    background-image: url(../images/ding.png);
+    position: absolute;
+}
+
+#dingityding {
+    background-image: url(../images/dingityding.png);
+    position: absolute;
+}
+
+#kaaching {
+    background-image: url(../images/kaaching.png);
+    position: absolute;
+}
+
+#kdtsnop {
+    background-image: url(../images/kdtsnop.png);
+    position: absolute;
+}
+
+#plop {
+    background-image: url(../images/plop.png);
+    position: absolute;
+}
+
+#ringaling {
+    background-image: url(../images/ringlaling.png);
+    position: absolute;
 }
 
 /* ANIMATIONS =========================================================== */
