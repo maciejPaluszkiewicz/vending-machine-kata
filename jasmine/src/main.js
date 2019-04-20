@@ -27,10 +27,19 @@ document.querySelector("#cap").addEventListener("mouseenter", function () { show
 document.querySelector("#cola").addEventListener("mouseenter", function () { showInfoMessage("This is Nuka Cola.") });
 document.querySelector("#chips").addEventListener("mouseenter", function () { showInfoMessage("This is bad idea to eat.") });
 document.querySelector("#candy").addEventListener("mouseenter", function () { showInfoMessage("This is bonus to INT stat.") });
-document.querySelector("#returnMoney").addEventListener("mouseenter", function () { showInfoMessage("This is rusty button.") });
+document.querySelector("#returnMoney").addEventListener("mouseenter", function () { showInfoMessage("This is big red button.") });
 
 document.querySelector(".display").addEventListener("mouseenter", function () { showInfoMessage("This is display of machine.") });
-document.querySelector(".targetNCMachine").addEventListener("mouseenter", function () { showInfoMessage("Still working. Amazing.") });
+document.querySelector(".targetNCMachine").addEventListener("mouseenter", function () {
+    let number = Math.floor(Math.random() * 100);
+    if (number > 60) {
+        showInfoMessage("This is pre-war technology.");
+    } else if (number > 30) {
+        showInfoMessage("This is Nuka Cola machine.");
+    } else {
+        showInfoMessage("Still working. Amazing.");
+    }
+});
 
 function animateCoin(weight) {
     let coinName = "#" + vendingMachine.checkCoinByWeight(weight);
