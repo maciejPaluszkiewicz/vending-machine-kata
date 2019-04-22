@@ -90,7 +90,6 @@ class VendingMachine {
     }
 
     calculateChange(productValue, moneyInserted) {
-        //debugger
         let moneyToReturn = moneyInserted * 100 - productValue * 100;
 
         const _updateChange = (coinType) => {
@@ -102,7 +101,6 @@ class VendingMachine {
             moneyToReturn -= coinsToReturn * coinValue;
             return coinsToReturn;
         }
-
         let quartersToReturn = _updateChange("quarter");
         let dimesToReturn = _updateChange("dime");
         let nickelsToReturn = _updateChange("nickel");
@@ -118,10 +116,6 @@ class VendingMachine {
         return "";
     }
 
-    giveBackCoin() {
-        //TODO
-    }
-
     giveBackAllCoins() {
         this.currentCoins.nickel = 0;
         this.currentCoins.dime = 0;
@@ -135,7 +129,6 @@ class VendingMachine {
     //---------------------------
     // Design Pattern Observer
     //---------------------------
-
 
     setMessage(message) {
         this.currentMessage = message;
@@ -158,7 +151,6 @@ class VendingMachine {
     subscribeForDispatch(observer) {
         this.dispatchObservers.push(observer);
     }
-
 
     //----------------------------
     // PUBLIC API+
@@ -185,7 +177,6 @@ class VendingMachine {
     }
 
     selectProduct(product) {
-        // debugger
         let soldOut = this.checkIfSoldOut(product);
         if (soldOut) {
             this.setMessage(this.messages.soldOut);
@@ -225,7 +216,4 @@ class VendingMachine {
             }
         }
     }
-
-    //----------------------------
-
 };

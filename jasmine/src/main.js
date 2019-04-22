@@ -12,6 +12,7 @@ const dispatchObserver = {
     update: function (element) {
         let dispatchDOMelement = document.querySelector(".dispatcher");
         dispatchDOMelement.classList.add(`dispatch-${element}`);
+        animateSoundForProduct(element);
         setTimeout(() => {
             dispatchDOMelement.classList.remove(`dispatch-${element}`);
         }, 2000);
@@ -21,6 +22,16 @@ const dispatchObserver = {
 vendingMachine.subscribeForMessages(displayObserver);
 vendingMachine.subscribeForDispatch(dispatchObserver);
 
+function showMachineSounds() {
+    var rand = Math.round(Math.random() * (10000 - 500)) + 500;
+    setTimeout(function () {
+        pickRandomSound();
+        showMachineSounds();
+    }, rand);
+};
+
+showMachineSounds();
+
 document.querySelector("#nickel").addEventListener("click", function () { animateCoin(5) });
 document.querySelector("#dime").addEventListener("click", function () { animateCoin(3) });
 document.querySelector("#quarter").addEventListener("click", function () { animateCoin(6) });
@@ -28,7 +39,12 @@ document.querySelector("#cap").addEventListener("click", function () { animateCo
 document.querySelector("#cola").addEventListener("click", function () { vendingMachine.selectProduct("cola") });
 document.querySelector("#chips").addEventListener("click", function () { vendingMachine.selectProduct("chips") });
 document.querySelector("#candy").addEventListener("click", function () { vendingMachine.selectProduct("candy") });
-document.querySelector("#returnMoney").addEventListener("click", function () { vendingMachine.giveBackMyMoney() });
+document.querySelector("#returnMoney").addEventListener("click", function () {
+    if (vendingMachine.sumCurrentCoinsValue() > 0) {
+        animateSound("#kdtsnop", "heartBeat", 1500);
+    }
+    vendingMachine.giveBackMyMoney();
+});
 
 document.querySelector("#nickel").addEventListener("mouseenter", function () { showInfoMessage("This is Nickel coin.") })
 document.querySelector("#dime").addEventListener("mouseenter", function () { showInfoMessage("This is Dime coin.") });
@@ -58,6 +74,11 @@ function animateCoin(weight) {
     coinDOMelement.classList.add("coinMoving");
     setTimeout(() => {
         coinDOMelement.classList.remove("coinMoving");
+        if (coinName === "#cap") {
+            animateSound("#plop", "bounce");
+        } else {
+            animateSound("#ding", "bounce");
+        }
         vendingMachine.insertCoin(weight);
     }, 1500);
 }
@@ -74,3 +95,32 @@ function updateMessenger() {
     document.querySelector("#infoMessage").innerHTML = messageArray.join("<br>");
 }
 
+function animateSound(nameOfSound, nameOfAnimation, duration) {
+    if (duration === undefined) duration = 1000;
+    let soundDOMelement = document.querySelector(nameOfSound);
+    soundDOMelement.classList.add(nameOfAnimation);
+    setTimeout(() => {
+        soundDOMelement.classList.remove(nameOfAnimation);
+    }, duration);
+}
+
+function animateSoundForProduct(element) {
+    if (element === "cola") {
+        animateSound("#dang", "bounce");
+    } else if (element === "chips") {
+        animateSound("#crush", "bounce");
+    } else {
+        animateSound("#bing", "bounce");
+    }
+}
+
+function pickRandomSound() {
+    const number = Math.floor(Math.random() * 3) + 1;
+    if (number === 1) {
+        animateSound("#dingityding", "heartBeat", 1500);
+    } else if (number === 2) {
+        animateSound("#ringaling", "heartBeat", 1500);
+    } else {
+        animateSound("#kaaching", "heartBeat", 1500);
+    }
+}
