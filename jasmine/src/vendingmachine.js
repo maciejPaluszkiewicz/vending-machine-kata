@@ -50,7 +50,9 @@ class VendingMachine {
 
         this.currentMessage = this.messages.insertCoin;
 
-        this.observers = [];
+        this.messageObservers = [];
+
+        this.dispatchObservers = [];
     }
 
     addToCurrentCoins(coin) {
@@ -137,16 +139,25 @@ class VendingMachine {
 
     setMessage(message) {
         this.currentMessage = message;
-        for (let observer of this.observers) {
+        for (let observer of this.messageObservers) {
             observer.update();
-
         }
     }
 
-    subscribe(observer) {
-        this.observers.push(observer);
+    subscribeForMessages(observer) {
+        this.messageObservers.push(observer);
     }
 
+
+    setDispatch(element) {
+        for (let observer of this.dispatchObservers) {
+            observer.update(element);
+        }
+    }
+
+    subscribeForDispatch(observer) {
+        this.dispatchObservers.push(observer);
+    }
 
 
     //----------------------------
@@ -207,6 +218,7 @@ class VendingMachine {
                 this.decreasePurchasedProductAmount(product);
                 this.addCurrentCoinsToBoxes();
                 this.setMessage(this.messages.thankYou);
+                this.setDispatch(product);
                 setTimeout(() => {
                     this.setMessage(this.messages.insertCoin);
                 }, 3000)

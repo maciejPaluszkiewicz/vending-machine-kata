@@ -8,8 +8,18 @@ const displayObserver = {
         document.querySelector("#message").innerHTML = vendingMachine.currentMessage;
     }
 }
+const dispatchObserver = {
+    update: function (element) {
+        let dispatchDOMelement = document.querySelector(".dispatcher");
+        dispatchDOMelement.classList.add(`dispatch-${element}`);
+        setTimeout(() => {
+            dispatchDOMelement.classList.remove(`dispatch-${element}`);
+        }, 2000);
+    }
+}
 
-vendingMachine.subscribe(displayObserver);
+vendingMachine.subscribeForMessages(displayObserver);
+vendingMachine.subscribeForDispatch(dispatchObserver);
 
 document.querySelector("#nickel").addEventListener("click", function () { animateCoin(5) });
 document.querySelector("#dime").addEventListener("click", function () { animateCoin(3) });
@@ -63,3 +73,4 @@ function showInfoMessage(infoMessage) {
 function updateMessenger() {
     document.querySelector("#infoMessage").innerHTML = messageArray.join("<br>");
 }
+

@@ -20,6 +20,7 @@
     top: 0px;
     left: 0px;
     background-image: url(../images/Nukacola2.png);
+    /* background-color: rgb(202, 202, 202); */
   
 }
 
@@ -239,8 +240,35 @@
 }
 
 .dispatcher{
-    
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 80px;
+    width: 55px;
+    top: 570px;
+    left: 700px;
+
 }
+
+.dispatch-cola {
+    background-image: url(../images/Cola000.png);
+    animation-duration: 2s;
+    animation-name: takeProduct;
+}
+
+.dispatch-chips {
+    background-image: url(../images/Chips000.png);
+    animation-duration: 2s;
+    animation-name: takeProduct;
+}
+
+.dispatch-candy {
+    background-image: url(../images/Candy000.png);
+    animation-duration: 2s;
+    animation-name: takeProduct;
+}
+
 /* .button {
 
     padding: 15px 25px;
@@ -333,4 +361,21 @@
 .coinMoving {
     animation-duration: 1.5s;
     animation-name: coinInsert;
+}
+
+@keyframes takeProduct {
+
+    25% {
+        top: 570px;
+        left: 700px;
+        transform: rotate(0deg);
+    }
+
+    100% {
+        top: 700px;
+        left: 800px;
+        transform: scale(4.0, 4.0) rotate(45deg);
+
+    }
+
 }
