@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vending Machine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="src/main.css" />
+    <script src="src/vendingmachine.js"></script>
+</head>
+
+<body>
+    <div class="thedeep">
+        <div class="background">
+            <div class="vmachine"></div>
+            <div class="targetNCMachine"></div>
+            <div class="coins">
+                <button id="nickel">0.05</button>
+                <button id="dime">0.10</button>
+                <button id="quarter">0.25</button>
+                <button id="cap">NukaCola</button>
+            </div>
+            <div class="options">
+                <button id="cola">Nuka Cola</button>
+                <button id="chips">Chips</button>
+                <button id="candy">Candy</button>
+                <div class="specialButtons">
+                    <div id="returnMoneyContainer">
+                        <button id="returnMoney"></button>
+                        <span id="msgGiveBackMoney">Give Back Money</span>
+                    </div>
+                </div>
+            </div>
+            <div class="display">
+                <div id="message">
+                    INSERT COIN
+                </div>
+            </div>
+            <div class="messenger">
+                <div id="infoMessage">
+                </div>
+            </div>
+            <div class="dispatcher"></div>
+            <div class="textedSounds">
+                <div id="bing"></div>
+                <div id="crush"></div>
+                <div id="dang"></div>
+                <div id="ding"></div>
+                <div id="dingityding"></div>
+                <div id="kaaching"></div>
+                <div id="kdtsnop"></div>
+                <div id="plop"></div>
+                <div id="ringaling"></div>
+            </div>
+        </div>
+    </div>
+    <script src="src/main.js"></script>
+</body>
+
+</html>
